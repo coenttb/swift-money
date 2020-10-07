@@ -28,7 +28,9 @@ public enum Money:Hashable, Comparable {
     }
     
     public var value: Decimal {
-        self.money.value
+        switch self {
+        case let .euro(euro): return euro.value
+        }
     }
     
     public var money: Money {
