@@ -82,11 +82,11 @@ public func €(_ value:Decimal) -> Money {
 
 
 extension Money:CustomStringConvertible {
-    
-    
-    
     public var description: String {
-        return self.description(environment: Locale.autoupdatingLanguage)
+        switch self {
+        case let .euro(euro): return euro.description(environment: Locale.autoupdatingLanguage)
+        }
+//        return self.description(environment: Locale.autoupdatingLanguage)
     }
 }
 
