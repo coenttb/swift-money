@@ -1,6 +1,7 @@
 import Foundation
-import Unit
+
 import Languages
+import Percent
 
 public protocol MoneyType {
     static var symbol:String { get }
@@ -10,11 +11,99 @@ public protocol MoneyType {
     var money:Money { get }
 }
 
-public enum Money:Hashable, Comparable {
+public enum Money:Hashable, Comparable, Codable {
+    
     case euro(Euro)
+    
+    
+    
+    public enum CodingKeys: String, CodingKey, Hashable, Equatable, CaseIterable, Codable {
+        case euro
+    }
 }
 
- extension Money:MoneyType {
+extension Money:TranslatedCustomStringConvertable {
+    public var translatedDescription: TranslatedString {
+        switch self {
+        case let .euro(euro): return euro.translatedDescription
+        }
+    }
+}
+
+
+extension Euro:TranslatedCustomStringConvertable {
+    public var translatedDescription: TranslatedString {
+        return .init(self.description)
+    }
+}
+extension Money: SignedNumeric {
+    
+    public static func *(rhs:Int, lhs:Money)->Money {
+        switch lhs {
+        case .euro(let e): return .euro(Euro.init(e.value * Decimal(rhs)))
+        }
+    }
+    
+    public static func *(rhs:Money, lhs:Int)->Money {
+        switch rhs {
+        case .euro(let e): return .euro(Euro.init(e.value * Decimal(lhs)))
+        }
+    }
+    
+    public static func *(rhs:Percentage, lhs:Money)->Money {
+        switch lhs {
+        case .euro(let e): return .euro(Euro.init(e.value * Decimal(rhs.fraction)))
+        }
+    }
+    
+    public static func *(rhs:Money, lhs:Percentage)->Money {
+        switch rhs {
+        case .euro(let e): return .euro(Euro.init(e.value * Decimal(lhs.fraction)))
+        }
+    }
+    
+    public init?<T>(exactly source: T) where T : BinaryInteger {
+        fatalError()
+    }
+    
+    public var magnitude: Int {
+        fatalError()
+    }
+    
+    public static func * (lhs: Money, rhs: Money) -> Money {
+        switch (lhs, rhs) {
+        case let (.euro(a1), .euro(a2)): return .euro(Euro.init(a1.value * a2.value))
+        }
+    }
+    
+    public static func *= (lhs: inout Money, rhs: Money) {
+        fatalError()
+    }
+    
+    public static func - (lhs: Money, rhs: Money) -> Money {
+        switch (lhs, rhs) {
+        case let (.euro(a1), .euro(a2)): return .euro(Euro.init(a1.value - a2.value))
+        }
+    }
+    
+    public init(integerLiteral value: Int) {
+        self = .euro(Euro.init(Decimal(value)))
+    }
+    
+    public typealias Magnitude = Int
+    
+    public static func + (lhs: Money, rhs: Money) -> Money {
+        switch (lhs, rhs) {
+        case let (.euro(a1), .euro(a2)): return .euro(Euro.init(a1.value + a2.value))
+        }
+    }
+    
+    public typealias IntegerLiteralType = Int
+    
+    
+}
+
+extension Money:MoneyType {
     public static var symbol: String {
         ""
     }
@@ -53,24 +142,20 @@ public func >=(_ t1:MoneyType, _ t2:MoneyType)->Bool {
 }
 
 public extension Money {
-    func description<Environment:HasLanguage>(environment:Environment)->String {
+    func description(include_words:Bool = false)->Translated<String> {
         switch self {
-        case let .euro(euro): return euro.description(environment: environment)
+        case let .euro(euro): return euro.description(include_words: include_words)
         }
     }
-    
     
     
     static func euro(_ value:Decimal) -> Money {
         return Money.euro(Euro(value))
     }
     
-    
-    
     var amount: Decimal {
         switch self {
         case let .euro(euro): return euro.value
-            
         }
     }
 }
@@ -81,17 +166,19 @@ public func €(_ value:Decimal) -> Money {
 
 
 
-extension Money:CustomStringConvertible {
-    public var description: String {
-        switch self {
-        case let .euro(euro): return euro.description(environment: Locale.autoupdatingLanguage)
-        }
-//        return self.description(environment: Locale.autoupdatingLanguage)
-    }
+//extension Money:CustomStringConvertible {
+//    public var description: String {
+//        switch self {
+//        case let .euro(euro): return euro.description()(.current)
+//        }
+//    }
+//}
+
+public extension Int {
+    var euro:Money { .euro(Euro.cash(Decimal(self))) }
 }
 
+
 public extension Double {
-    var euro:Money {
-        .euro(Euro.cash(Decimal(self)))
-    }
+    var euro:Money { .euro(Euro.cash(Decimal(self))) }
 }
