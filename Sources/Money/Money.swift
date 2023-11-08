@@ -103,6 +103,50 @@ extension Money: SignedNumeric {
     
 }
 
+//extension Money:BinaryInteger {
+//    public typealias Words = <#type#>
+//    
+//    public static var isSigned: Bool {
+//        <#code#>
+//    }
+//    
+//    public init?<T>(exactly source: T) where T : BinaryFloatingPoint {
+//        <#code#>
+//    }
+//    
+//    public var bitWidth: Int {
+//        <#code#>
+//    }
+//    
+//    public var trailingZeroBitCount: Int {
+//        <#code#>
+//    }
+//    
+//    public static func / (lhs: Money, rhs: Money) -> Money {
+//        <#code#>
+//    }
+//    
+//    public static func % (lhs: Money, rhs: Money) -> Money {
+//        <#code#>
+//    }
+//    
+//    public static func %= (lhs: inout Money, rhs: Money) {
+//        <#code#>
+//    }
+//    
+//    public static func &= (lhs: inout Money, rhs: Money) {
+//        <#code#>
+//    }
+//    
+//    public static func |= (lhs: inout Money, rhs: Money) {
+//        <#code#>
+//    }
+//    
+//    public static func ^= (lhs: inout Money, rhs: Money) {
+//        <#code#>
+//    }
+//}
+
 extension Money:MoneyType {
     public static var symbol: String {
         ""
@@ -153,6 +197,10 @@ public extension Money {
         return Money.euro(Euro(value))
     }
     
+    static func euro(_ value:Double) -> Money {
+        return Money.euro(Euro(Decimal(value)))
+    }
+    
     var amount: Decimal {
         switch self {
         case let .euro(euro): return euro.value
@@ -181,4 +229,16 @@ public extension Int {
 
 public extension Double {
     var euro:Money { .euro(Euro.cash(Decimal(self))) }
+}
+
+public func /(_ money:Money, _ decimal: Decimal)->Money {
+    switch money {
+    case .euro(let euro): return .euro(.cash(euro.value / decimal))
+    }
+}
+
+public func /(_ money:Money, _ double: Double)->Money {
+    switch money {
+    case .euro(let euro): return .euro(.cash(euro.value / Decimal(double)))
+    }
 }

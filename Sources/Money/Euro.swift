@@ -142,9 +142,11 @@ public enum Euro:MoneyType, Hashable, ExpressibleByFloatLiteral, Comparable, Cod
         .init { language in
             if !include_words {
                 if let value = formatter.string(from: value as NSNumber) {
-                    return .init("&euro; \(value)")
+//                    return .init("&euro; \(value)")
+                    return .init("€ \(value)")
                 } else {
-                    return .init("&euro; \(value)")
+//                    return .init("&euro; \(value)")
+                    return .init("€ \(value)")
                 }
             } else {
 
