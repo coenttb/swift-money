@@ -197,9 +197,9 @@ public extension Money {
         return Money.euro(Euro(value))
     }
     
-    static func euro(_ value:Double) -> Money {
-        return Money.euro(Euro(Decimal(value)))
-    }
+//    static func euro(_ value:Double) -> Money {
+//        return Money.euro(Euro(Decimal(value)))
+//    }
     
     var amount: Decimal {
         switch self {
