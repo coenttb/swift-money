@@ -12,7 +12,7 @@ extension Target.Dependency {
 }
 
 extension Target.Dependency {
-    static let languages:Self = .product(name: "Languages", package: "swift-languages")
+    static let languages:Self = .product(name: "Languages", package: "swift-language")
     static let percent:Self = .product(name: "Percent", package: "swift-percent")
 }
 
@@ -26,7 +26,7 @@ let package = Package(
             targets: [.money]),
     ],
     dependencies: [
-        .package(url: "git@bitbucket.org:LegalKit/swift-languages.git", branch: "main"),
+        .package(url: "git@bitbucket.org:LegalKit/swift-language.git", branch: "main"),
         .package(url: "git@bitbucket.org:LegalKit/swift-percent.git", branch: "main"),
     ],
     targets: [
