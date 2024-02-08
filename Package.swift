@@ -26,8 +26,9 @@ let package = Package(
             targets: [.money]),
     ],
     dependencies: [
-        .package(url: "git@bitbucket.org:LegalKit/swift-language.git", branch: "main"),
-        .package(url: "git@bitbucket.org:LegalKit/swift-percent.git", branch: "main"),
+        .package(url: "git@github.com:rule-legal/swift-language.git", branch: "main"),
+        .package(url: "git@github.com:rule-legal/swift-percent.git", branch: "main"),
+        
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
