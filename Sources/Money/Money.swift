@@ -22,20 +22,6 @@ public enum Money:Hashable, Comparable, Codable {
     }
 }
 
-extension Money:TranslatedCustomStringConvertable {
-    public var translatedDescription: TranslatedString {
-        switch self {
-        case let .euro(euro): return euro.translatedDescription
-        }
-    }
-}
-
-
-extension Euro:TranslatedCustomStringConvertable {
-    public var translatedDescription: TranslatedString {
-        return .init(self.description)
-    }
-}
 extension Money: SignedNumeric {
     
     public static func *(rhs:Int, lhs:Money)->Money {
