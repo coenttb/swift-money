@@ -7,25 +7,24 @@
 
 import Foundation
 
-
 public enum CirculationCoin {
     case gewoon
     case herdenking
 }
 
 public enum Coin {
-    
+
     case euro(Euro)
-    
+
     public enum Shape {
         case round
         case spanishFlower
     }
-    
+
     public enum Color {
         case single(Color)
-        case double(inner:Color, outer:Color)
-        
+        case double(inner: Color, outer: Color)
+
         public enum Color {
             case yellow
             case white
@@ -34,7 +33,7 @@ public enum Coin {
     }
 }
 
-//extension CoinType where Denomination == Euro.Coin {
+// extension CoinType where Denomination == Euro.Coin {
 //    
 //    public var color: Coin.Color {
 //        switch denomination {
@@ -100,4 +99,4 @@ public enum Coin {
 //        case .euro(.two): return .round
 //        }
 //    }
-//}
+// }

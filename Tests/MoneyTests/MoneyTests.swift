@@ -1,5 +1,5 @@
-import XCTest
 @testable import Money
+import XCTest
 
 final class MoneyTests: XCTestCase {
     func testExample() {
@@ -10,6 +10,6 @@ final class MoneyTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

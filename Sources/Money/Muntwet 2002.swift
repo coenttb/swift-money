@@ -8,7 +8,7 @@
 import Foundation
 
 protocol EuromuntType {
-    
+
 }
 
 struct Euromunt {}
@@ -18,13 +18,12 @@ struct GewoneCirculatiemunt {}
 struct Herdenkingsmunt {}
 
 struct MuntVoorVerzamelaar {
-    
+
 }
 
 struct MuntZonderHoedanigheidVanWettigBetaalmiddel {
-    
-}
 
+}
 
 enum MuntDieDoorDeStaatDerNederlandenWordtUitgegeven {
     case circulatiemunt
@@ -32,4 +31,3 @@ enum MuntDieDoorDeStaatDerNederlandenWordtUitgegeven {
     case muntVoorVerzamelaar
     case muntZonderHoedanigheidVanWettigBetaalmiddel
 }
-

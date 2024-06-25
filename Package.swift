@@ -4,16 +4,16 @@
 import PackageDescription
 
 extension String {
-    static let money:Self = "Money"
+    static let money: Self = "Money"
 }
 
 extension Target.Dependency {
-    static let money:Self = .target(name: .money)
+    static let money: Self = .target(name: .money)
 }
 
 extension Target.Dependency {
-    static let languages:Self = .product(name: "Languages", package: "swift-language")
-    static let percent:Self = .product(name: "Percent", package: "swift-percent")
+    static let languages: Self = .product(name: "Languages", package: "swift-language")
+    static let percent: Self = .product(name: "Percent", package: "swift-percent")
 }
 
 let package = Package(
@@ -23,12 +23,12 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: .money,
-            targets: [.money]),
+            targets: [.money])
     ],
     dependencies: [
         .package(url: "git@github.com:tenthijeboonkkamp/swift-language.git", branch: "main"),
-        .package(url: "git@github.com:tenthijeboonkkamp/swift-percent.git", branch: "main"),
-        
+        .package(url: "git@github.com:tenthijeboonkkamp/swift-percent.git", branch: "main")
+
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
