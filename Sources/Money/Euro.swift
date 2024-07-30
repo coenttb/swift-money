@@ -181,5 +181,5 @@ public extension NumberFormatter {
 }
 
 extension Euro: CustomStringConvertible {
-    public var description: String { self.description(include_words: false)(Locale.autoupdatingLanguage) }
+    public var description: String { self.description(include_words: false)(Languages.Language.init(locale: Locale.autoupdatingCurrent)) }
 }
