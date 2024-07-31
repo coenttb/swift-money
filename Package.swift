@@ -8,12 +8,12 @@ extension String {
 }
 
 extension Target.Dependency {
-    static let money: Self = .target(name: .money)
+    static var money: Self { .target(name: .money) }
 }
 
 extension Target.Dependency {
-    static let languages: Self = .product(name: "Languages", package: "swift-language")
-    static let percent: Self = .product(name: "Percent", package: "swift-percent")
+    static var languages: Self { .product(name: "Languages", package: "swift-language") }
+    static var percent: Self { .product(name: "Percent", package: "swift-percent") }
 }
 
 let package = Package(
