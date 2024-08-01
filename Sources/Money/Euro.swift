@@ -180,6 +180,7 @@ public extension NumberFormatter {
     }()
 }
 
+@available(macOS 13, iOS 16, *)
 extension Euro: CustomStringConvertible {
     public var description: String { self.description(include_words: false)(Languages.Language.init(locale: Locale.autoupdatingCurrent)) }
 }
