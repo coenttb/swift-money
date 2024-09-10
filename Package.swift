@@ -26,8 +26,8 @@ let package = Package(
             targets: [.money])
     ],
     dependencies: [
-        .package(url: "git@github.com:tenthijeboonkkamp/swift-language.git", branch: "main"),
-        .package(url: "git@github.com:tenthijeboonkkamp/swift-percent.git", branch: "main")
+        .package(url: "https://github.com/coenttb/swift-language.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/swift-percent.git", branch: "main")
 
     ],
     targets: [
