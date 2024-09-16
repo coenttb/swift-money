@@ -18,7 +18,11 @@ extension Target.Dependency {
 
 let package = Package(
     name: "swift-money",
-    platforms: [.macOS(.v13), .iOS(.v13)],
+    platforms: [
+        .macOS(.v13),
+        .iOS(.v16),
+        .macCatalyst(.v16)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
